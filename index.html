@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/icon" href="/favicon-32x32.png">
+  <title>Quiz App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: rgb(33, 243, 198);
+      background: linear-gradient(90deg, rgba(33, 243, 198, 1) 0%, rgba(244, 172, 208, 1) 35%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      height: 100vh;
+      margin: 0;
+
+    }
+
+    #quiz-container {
+      max-width: 500px;
+      padding: 20px;
+      background-color: #fff;
+      background-repeat: repeat;
+      background-size: cover;
+      background-image: url("https://img.freepik.com/free-photo/vertical-aesthetic-background-with-3d-effect_23-2150644137.jpg?ga=GA1.1.1639133888.1710839055&semt=ais_hybrid");
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    #question-container {
+      margin-bottom: 20px;
+    }
+
+    #question-text {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+    }
+
+    .option {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #f5f5f5;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .option:hover {
+      background-color: #e0e0e0;
+    }
+
+    #submit-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: green;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #submit-btn:hover {
+      background-color: #45a049;
+    }
+
+
+
+    .muzieknootjes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .noot {
+      position: absolute;
+      animation: notes 5s infinite linear;
+      font-size: 30px;
+      opacity: 0;
+      bottom: -20px;
+    }
+
+    .noot:nth-child(1) {
+      left: 5%;
+      animation-delay: 0s;
+    }
+
+    .noot:nth-child(2) {
+      left: 15%;
+      animation-delay: 0.5s;
+    }
+
+    .noot:nth-child(3) {
+      left: 25%;
+      animation-delay: 1s;
+    }
+
+    .noot:nth-child(4) {
+      left: 35%;
+      animation-delay: 1.5s;
+    }
+
+    .noot:nth-child(5) {
+      left: 45%;
+      animation-delay: 2s;
+    }
+
+    .noot:nth-child(6) {
+      left: 55%;
+      animation-delay: 2.5s;
+    }
+
+    .noot:nth-child(7) {
+      left: 65%;
+      animation-delay: 3s;
+    }
+
+    .noot:nth-child(8) {
+      left: 75%;
+      animation-delay: 3.5s;
+    }
+
+    .noot:nth-child(9) {
+      left: 85%;
+      animation-delay: 4s;
+    }
+
+    .noot:nth-child(10) {
+      left: 95%;
+      animation-delay: 4.5s;
+    }
+
+    @keyframes notes {
+      0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(-50vh) scale(1.1);
+      }
+
+      100% {
+        transform: translateY(-100vh) scale(1.3);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="muzieknootjes">
+    <div class="noot">💭</div>
+    <div class="noot">💭</div>
+    <div class="noot">💭</div>
+    <div class="noot">💭</div>
+    <div class="noot">💭</div>
+    <div class="noot">💭</div>
+    <div class="noot">💭</div>
+    <div class="noot">💭</div>
+    <div class="noot">💭</div>
+    <div class="noot">💭</div>
+  </div>
+
+
+
+
+  <div id="quiz-container">
+    <h1>Quiz App</h1>
+    <div id="question-container">
+      <p id="question-text"></p>
+    </div>
+    <div id="options-container">
+      <button class="option"></button>
+      <button class="option"></button>
+      <button class="option"></button>
+      <button class="option"></button>
+    </div>
+    <button id="submit-btn">Submit</button>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "1.What does HTML stand for?",
+        options: ["HyperText Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language", "High-Tech Markup Language"],
+        answer: 0
+      },
+      {
+        question: "2.Which tag is used to create a numbered list?",
+        options: ["<ol>", "<ul>", "<li>", "<list>"],
+        answer: 0
+      },
+      {
+        question: "3.Which property is used to change the text color of an element?",
+        options: ["color", "text-color", "background-color", " font-color"],
+        answer: 0
+      },
+      {
+        question: "4.Which CSS property is used to control the space between lines of text?",
+        options: ["spacing", "letter-spacing", "text-spacing", "line-height"],
+        answer: 3
+      },
+      {
+        question: "5.Which element has the chemical symbol 'O'?",
+        options: ["Oxygen", "Gold", "Osmium", "Ozone"],
+        answer: 0
+      },
+      {
+        question: "6.Which of the following is a correct way to write a JavaScript array? ",
+        options: ["let arr = [1, 2, 3, 4];","let arr = (1, 2, 3, 4);","let arr = {1, 2, 3, 4};", "let arr = {2,3,4,5};"],
+        answer: 0
+      },
+      {
+        question: "7.What is the fastest land animal?",
+        options: ["Cheetah", "Lion", "Tiger", "Elephant"],
+        answer: 0
+      },
+      {
+        question: "8.What is the square root of 144?",
+        options: ["12", "14", "16", "10"],
+        answer: 0
+      },
+      {
+        question: "9.In what year did World War II end?",
+        options: ["1945", "1918", "1939", "1950"],
+        answer: 0
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let results = [];
+
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      questionText.textContent = question.question;
+
+      optionsContainer.innerHTML = '';
+      question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'option';
+        button.textContent = option;
+        optionsContainer.appendChild(button);
+
+        button.addEventListener('click', () => {
+          if (index === question.answer) {
+            button.style.backgroundColor = 'green';
+            score++;
+            results[currentQuestion] = 'Correct';
+          } else {
+            button.style.backgroundColor = 'red';
+            results[currentQuestion] = 'Incorrect';
+          }
+
+          disableOptions();
+          submitBtn.disabled = false;
+        });
+      });
+    }
+
+    function disableOptions() {
+      const options = document.getElementsByClassName('option');
+      for (let i = 0; i < options.length; i++) {
+        options[i].disabled = true;
+      }
+    }
+
+    function showNextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+        submitBtn.disabled = true;
+      } else {
+        endQuiz();
+      }
+    }
+
+    function endQuiz() {
+      questionText.textContent = `Quiz ended! Your score is ${score}/${questions.length}`;
+      optionsContainer.innerHTML = '';
+
+      const resultsContainer = document.createElement('div');
+      resultsContainer.innerHTML = '<h3>Results:</h3>';
+      questions.forEach((q, index) => {
+        const result = document.createElement('p');
+        result.textContent = `${index + 1}. ${q.question} - ${results[index]}`;
+        resultsContainer.appendChild(result);
+      });
+
+      optionsContainer.appendChild(resultsContainer);
+
+      submitBtn.textContent = 'Restart';
+      submitBtn.disabled = false;
+      submitBtn.addEventListener('click', restartQuiz);
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      results = [];
+      submitBtn.textContent = 'Submit';
+      submitBtn.disabled = true;
+      showQuestion();
+    }
+
+    showQuestion();
+    submitBtn.addEventListener('click', showNextQuestion);
+  </script>
+</body>
+
+</html>
